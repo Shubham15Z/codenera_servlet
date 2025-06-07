@@ -26,6 +26,20 @@ public class Student
 		this.city = city;
 	}
 	
+	
+	
+	public Student(int rollNo, String name, String password, String contactno, String email, String birthdate,
+			String city) {
+		super();
+		RollNo = rollNo;
+		this.name = name;
+		this.password = password;
+		this.contactno = contactno;
+		this.email = email;
+		this.birthdate = birthdate;
+		this.city = city;
+	}
+
 	public int getRollNo() {
 		return RollNo;
 	}

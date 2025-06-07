@@ -13,16 +13,17 @@ import com.bo.Student;
 import com.dao.StudentDao;
 
 /**
- * Servlet implementation class SignUpController
+ * Servlet implementation class UpdateController
  */
-@WebServlet("/SignUpController")
-public class SignUpController extends HttpServlet {
+@WebServlet("/UpdateController")
+public class UpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public SignUpController() {
+    public UpdateController() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -31,30 +32,32 @@ public class SignUpController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		
 		PrintWriter pw = response.getWriter();
 		
+		int rollno = Integer.parseInt(request.getParameter("rollno"));
 		String name = request.getParameter("name");
-		String pwd = request.getParameter("pwd");
+		String password = request.getParameter("pwd");
+		String contactno = request.getParameter("contactno");
 		String email = request.getParameter("email");
 		String birthdate = request.getParameter("birthdate");
 		String city = request.getParameter("city");
-		String contactno = request.getParameter("contactno");
 		
-		Student s1 = new Student(name, pwd, contactno, email, birthdate, city);
+		Student s = new Student(rollno, name, password, contactno, email, birthdate, city);
 		
-		int status = StudentDao.insertStudent(s1);
-		System.out.println(status);
+		int status = StudentDao.updateStudent(s);
 		if(status > 0)
 		{
-			pw.print("<script> alert('Data Inserted Successfully....') </script>");
-			RequestDispatcher rd = request.getRequestDispatcher("index.html");
-			rd.forward(request, response);
+			pw.print("<script> alert('Data Updated Successfully...') </script>");
+			RequestDispatcher rd = request.getRequestDispatcher("ViewDataController");
+			rd.include(request, response);
 		}
 		else
 		{
-			pw.print("Something Went Wrong...");
+			pw.print("<script> alert('Something went wrong...') </script>");
+			RequestDispatcher rd = request.getRequestDispatcher("dashboard.html");
+			rd.forward(request, response);
 		}
+		
 	}
 
 }

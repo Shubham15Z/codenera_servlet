@@ -47,6 +47,8 @@ public class ViewDataController extends HttpServlet {
 					+"<th>Email</th>"
 					+"<th>Birthdate</th>"
 					+"<th>City</th>"
+					+"<th>Edit</th>"
+					+"<th>Delete</th>"
 				+ "</tr>");
 		
 		for(Student s : li)
@@ -59,6 +61,8 @@ public class ViewDataController extends HttpServlet {
 						+"<td>"+s.getEmail()+"</td>"
 						+"<td>"+s.getBirthdate()+"</td>"
 						+"<td>"+s.getCity()+"</td>"
+						+"<td><a href='EditController?rollno="+s.getRollNo()+"'>Edit</a></td>"
+						+"<td><a href='DeleteController?rollno="+s.getRollNo()+"'>Delete</a></td>"
 					+ "</tr>");
 		}
 		
